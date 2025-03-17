@@ -5,6 +5,9 @@ from django.core.exceptions import ValidationError
 from datetime import date
 
 class CustomUser(AbstractUser):
+    username = None
+    USERNAME_FIELD = 'email'
+
     groups = models.ManyToManyField(
         Group,
         related_name="custom_users",  
@@ -15,7 +18,7 @@ class CustomUser(AbstractUser):
 
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name="custom_users",  # 
+        related_name="custom_users",
         blank=True,
         help_text="Specific permissions for this user.",
         verbose_name="user permissions"
@@ -66,6 +69,7 @@ class CustomUser(AbstractUser):
 
     email = models.EmailField(
         max_length=255,
+        unique=True,
         null=False,
         blank=False,
         validators=[EmailValidator(message="Masukkan format email yang valid.")]
