@@ -47,7 +47,7 @@ class CustomUserForm(forms.ModelForm):
         }
 
         labels = {
-            'nama': 'Nama Lengkap',
+            'nama': 'Nama',
             'password': 'Password',
             'tanggal_lahir': 'Tanggal Lahir',
             'nomor_hp': 'Nomor HP',

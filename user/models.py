@@ -30,7 +30,7 @@ class CustomUser(AbstractUser):
         blank=False,
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z0-9._\- ]+$',
+                regex=r'^[a-zA-Z0-9._\-]+$',
                 message="Nama hanya boleh diisi oleh huruf, angka, dan karakter titik (.), underscore (_), atau strip (-)"
             )
         ]
