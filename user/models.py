@@ -3,10 +3,37 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.core.validators import RegexValidator, MinLengthValidator, MaxLengthValidator, URLValidator, EmailValidator
 from django.core.exceptions import ValidationError
 from datetime import date
+from django.contrib.auth.base_user import BaseUserManager
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, nama, email, password=None, **extra_fields):
+        if not nama:
+            raise ValueError("The Nama field must be set")
+        if not email:
+            raise ValueError("The Email field must be set")
+        email = self.normalize_email(email)
+        user = self.model(nama=nama, email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, nama, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('tanggal_lahir', '2000-01-01')
+        extra_fields.setdefault('nomor_hp', '62123456789')
+        extra_fields.setdefault('url_blog', 'http://example.com')
+        extra_fields.setdefault('deskripsi_diri', 'Admin deskripsi')
+        extra_fields.setdefault('npwp', '11.222.333.4-555.666')
+        extra_fields.setdefault('status_sertifikasi', 'Belum')
+
+        return self.create_user(nama, email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
     username = None
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'nama'
+
+    objects = CustomUserManager()
 
     groups = models.ManyToManyField(
         Group,
@@ -23,11 +50,12 @@ class CustomUser(AbstractUser):
         help_text="Specific permissions for this user.",
         verbose_name="user permissions"
     )
-
+    
     nama = models.CharField(
         max_length=255,
         null=False,
         blank=False,
+        unique=True,
         validators=[
             RegexValidator(
                 regex=r'^[a-zA-Z0-9._\-]+$',

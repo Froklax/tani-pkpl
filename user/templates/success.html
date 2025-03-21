@@ -16,17 +16,17 @@
         <div class="mb-20 bg-white rounded-lg max-w-xl w-full p-12 space-y-8">
         <div>
             <h2 class="mt-3 text-center text-3xl font-extrabold text-black">
-            Registration Successful!
+            Login Successful!
             </h2>
         </div>
         <div class="text-center">
             <p class="text-lg text-black">
-            Your account has been successfully created.
+            Welcome to the homepage.
             </p>
         </div>
         <div class="text-center">
-            <a href="{% url 'register' %}" class="inline-block px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out">
-            Back to Register
+            <a href="{% url 'user:logout' %}" class="inline-block px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 ease-in-out">
+            Logout
             </a>
         </div>
         </div>
