@@ -13,11 +13,17 @@ def dashboard(request):
         field__user=request.user, 
         status__in=['Preparation', 'Planting', 'Maintenance']
     ).count()
-    ready_for_harvest = Planting.objects.filter(
+    ready_maintenance = Planting.objects.filter(
+    field__user=request.user,
+    status='Maintenance',
+    estimated_harvest__lte=date.today()
+    )
+    ready_harvest = Planting.objects.filter(
         field__user=request.user,
-        status='Maintenance',
-        estimated_harvest__lte=date.today()
-    ).count()
+        status='Harvest'
+    )
+    ready_for_harvest = ready_maintenance.count() + ready_harvest.count()
+
     context = {
         'field_count': field_count,
         'active_plantings': active_plantings,
