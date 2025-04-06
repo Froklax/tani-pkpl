@@ -25,9 +25,16 @@
             </p>
         </div>
         <div class="text-center">
-            <a href="{% url 'user:logout' %}" class="inline-block px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 ease-in-out">
-            Logout
-            </a>
+            <div class="mb-4">
+                <a href="{% url 'pertanian:dashboard' %}" class="inline-block px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 ease-in-out">
+                    Go to Pertanian Dashboard
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'user:logout' %}" class="inline-block px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 ease-in-out">
+                    Logout
+                </a>
+            </div>
         </div>
         </div>
     </div>
