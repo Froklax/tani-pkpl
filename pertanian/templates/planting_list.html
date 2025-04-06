@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Planting List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-yellow-400">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg max-w-4xl w-full p-12 space-y-8">
+            <h1 class="text-3xl font-extrabold text-center text-black">Planting List</h1>
+            <div class="flex justify-center">
+                <a href="{% url 'pertanian:planting_create' %}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-2xl transition duration-300 ease-in-out">
+                    + Add Planting
+                </a>
+            </div>
+            <div class="space-y-4">
+                {% for planting in planting_list %}
+                    <a href="{% url 'pertanian:planting_detail' planting.pk %}" class="block p-4 bg-gray-100 rounded-2xl hover:bg-gray-200 transition duration-200">
+                        <div class="text-lg font-semibold">{{ planting.plant.name }}</div>
+                        <div class="text-sm text-gray-600">Field: {{ planting.field.field_name }}</div>
+                        <div class="text-sm text-gray-600">Status: {{ planting.status }}</div>
+                        <div class="text-sm text-gray-600">Planted on: {{ planting.planting_date }}</div>
+                        <div class="text-sm text-gray-600">Estimated Harvest: {{ planting.estimated_harvest }}</div>
+                    </a>
+                {% empty %}
+                    <p class="text-center text-gray-500">No plantings found.</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a href="{% url 'pertanian:dashboard' %}" class="text-blue-600 hover:underline">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
